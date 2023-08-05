@@ -35,7 +35,7 @@ if len(tickers) != 0:
         prices_df = calculate_prices_df(tickers, start, end)
         st.pyplot(stock_price_trend_graph(prices_df, start_date= start, end_date= end))
 else:
-        st.markdown("<h3 style='text-align: center; color: green;'>Choose stock options to make futher calculations </h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='text-align: center; color: green;'>Choose stock option to make futher calculations </h3>", unsafe_allow_html=True)
 
 st.markdown("# Log Returns ")
 st.markdown("Compute the log return as follows: ")
@@ -46,7 +46,7 @@ try:
         returns_df = calculate_returns_df(prices_df)
         st.pyplot(daily_returns_stock(returns_df))
 except:
-        st.markdown("<h3 style='text-align: center; color: green;'>Choose stocks options to returns graph </h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='text-align: center; color: green;'>Choose stock options to returns graph </h3>", unsafe_allow_html=True)
     
 
 st.markdown("# Sharpe ratio")
@@ -93,7 +93,7 @@ try:
         st.write(min_vol_allocation)
         st.pyplot(simulated_portfolio_graph(expected_Return, expected_Volatility, max_sharpe_index, min_volality_index, sharpe_Ratio ))
 except:
-        st.markdown("<h3 style='text-align: center; color: green;'>Choose stocks options to draw graph </h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='text-align: center; color: green;'>Choose stock options to draw graph </h3>", unsafe_allow_html=True)
 
 st.markdown("# Portfolio Optimization theory")
 st.markdown("The plot of the randomly simulated portfolio exhibits an arch-shaped line positioned above a cluster of blue dots, which is commonly referred to as the efficient frontier. \
@@ -129,7 +129,7 @@ try:
         st.write("Maximum Sharpe Ratio Optimal Portfolio Allocation (Percentage)")
         st.write(max_sharpe_opt_allocation)
 except:
-        st.markdown("<h3 style='text-align: center; color: green;'>Choose stocks options to draw graph </h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='text-align: center; color: green;'>Choose stock options to draw graph </h3>", unsafe_allow_html=True)
 
 st.markdown("## Minimum Volatility portfolio")
 st.latex(r'''\begin{aligned}
@@ -151,7 +151,7 @@ try:
         st.write("Minimum Volatility Optimal Portfolio Allocation (Percentage)")
         st.write(min_vol_opt_allocation)
 except:
-        st.markdown("<h3 style='text-align: center; color: green;'>Choose stocks options to draw graph </h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='text-align: center; color: green;'>Choose stock options to draw graph </h3>", unsafe_allow_html=True)
 
 st.markdown("## The Minimum Risk Mean-Variance Portfolio (Efficient Markowitz Frontier)")
 st.markdown("We can also plot a line on the graph that represents the efficient portfolios for a specific risk level, known as the 'efficient frontier'. \
@@ -171,7 +171,7 @@ try:
         st.pyplot(portfolio_optimization_graph(returns_df, mean_returns, expected_Volatility, expected_Return, sharpe_Ratio, \
                                         max_sharpe_opt_Volatility, max_sharpe_opt_Return, min_vol_opt_Volatility, min_vol_opt_Return, volatility_opt, simulate_returns))
 except:
-        st.markdown("<h3 style='text-align: center; color: green;'>Choose stocks options to draw graph </h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='text-align: center; color: green;'>Choose stock options to draw graph </h3>", unsafe_allow_html=True)
 
 
 st.markdown("# Optimal Portfolio")
@@ -216,4 +216,4 @@ try:
         for i, txt in enumerate(returns_df.columns):
                 st.write( "{}: annuaised return: {}, annualised volatility:{}".format(txt, round(an_rt[i], 2), round(an_vol[i], 2)))
 except:
-        st.markdown("<h3 style='text-align: center; color: green;'>Choose stocks options to draw graph </h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='text-align: center; color: green;'>Choose stock options to draw graph </h3>", unsafe_allow_html=True)
