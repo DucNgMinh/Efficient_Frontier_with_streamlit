@@ -99,7 +99,7 @@ def capital_allocation_line_graph(a, risk_free_rate, expected_Return, expected_V
 
     plt.plot(CAL_line[:,0], CAL_line[:,1],"-", label='Capital Allocation Line')
     plt.plot(volatility_opt, simulate_returns, linestyle='-.', color='black', label='efficient frontier')
-    plt.legend(loc= 0, labelspacing=0.8)
+    plt.legend(loc= 3, labelspacing=0.8)
     plt.title('Optimal Portfolio Recommendation')
     plt.xlabel('Expected Volatility')
     plt.ylabel('Expected Annualised Log Return')
