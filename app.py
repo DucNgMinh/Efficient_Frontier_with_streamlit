@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use('fivethirtyeight')
-import scipy.optimize as sco
 
 from vnstock import *
 
@@ -25,7 +24,7 @@ start = start.strftime("%Y-%m-%d")
 end = end.strftime("%Y-%m-%d")
 
 # ticker_list
-ticker_list = pd.read_csv(r"C:\Users\ADMIN\PycharmProjects\Market_Risk(Efficient_Frontier)\listing_companies_enhanced-2023.csv")
+ticker_list = pd.read_csv(r".\Data\listing_companies_enhanced-2023.csv")
 
 # input widget to choose stock option
 tickers = st.multiselect("Select two or more stocks:", ticker_list['ticker'])
@@ -90,8 +89,8 @@ st.pyplot(simulated_portfolio_graph(expected_Return, expected_Volatility, max_sh
 
 st.markdown("# Portfolio Optimization theory")
 st.markdown("The plot of the randomly simulated portfolio exhibits an arch-shaped line positioned above a cluster of blue dots, which is commonly referred to as the efficient frontier. \
-            This line is deemed 'efficient' as it represents the portfolio combinations that yield the lowest risk for a given target return.\
-            Any points located on the efficient frontier offer the optimal trade-off between risk and return.")
+                This line is deemed 'efficient' as it represents the portfolio combinations that yield the lowest risk for a given target return.\
+                Any points located on the efficient frontier offer the optimal trade-off between risk and return.")
 st.markdown("The way we found the two kinds of optimal portfolio above was by simulating many possible random choices and pick the best ones (either minimum risk or maximum risk-adjusted return).")
 
 st.markdown("## Maximum Sharpe ratio portfolio (MSRP)")
@@ -142,8 +141,8 @@ st.write(min_vol_opt_allocation)
 
 st.markdown("## The Minimum Risk Mean-Variance Portfolio (Efficient Markowitz Frontier)")
 st.markdown("We can also plot a line on the graph that represents the efficient portfolios for a specific risk level, known as the 'efficient frontier'. \
-            This frontier is determined by taking into account two constraints: the first constraint being that the sum of weights allocated to the portfolio must equal 1, \
-            and the second constraint being the calculation of the most efficient portfolio for a given target return.")
+                This frontier is determined by taking into account two constraints: the first constraint being that the sum of weights allocated to the portfolio must equal 1, \
+                and the second constraint being the calculation of the most efficient portfolio for a given target return.")
 st.latex(r'''\begin{aligned}
         & \underset{w}{\text{minimize}}
         & & W^T \Sigma W \\
@@ -156,13 +155,13 @@ st.latex(r'''\begin{aligned}
 volatility_opt, simulate_returns = calculate_opt_allocation(n_stocks, mean_returns, cov_matrix, expected_Return, max_sharpe_index, min_volality_index)
 
 st.pyplot(portfolio_optimization_graph(returns_df, mean_returns, expected_Volatility, expected_Return, sharpe_Ratio, \
-                                    max_sharpe_opt_Volatility, max_sharpe_opt_Return, min_vol_opt_Volatility, min_vol_opt_Return, volatility_opt, simulate_returns))
+                                        max_sharpe_opt_Volatility, max_sharpe_opt_Return, min_vol_opt_Volatility, min_vol_opt_Return, volatility_opt, simulate_returns))
 
 st.markdown("# Optimal Portfolio")
 st.markdown("## Capital Allocation Line")
 st.markdown("The Capital Allocation Line (CAL) here assumes an investor allocates a weighted portfolio of cash and/or the optimised sharpe ratio portfolio. The line is plotted on the same axis of the Efficient Frontier.")
 st.markdown("The line (blue line in plot below) intersects the y-axis where the investor holds 100% risk free asset, where the rate of return is the dividend of a bond. The line intersects Efficient Frontier when the \
-            investor holds 100% of the Sharpe Optimised portfolio. If the portfolio hold is risk taking it can take loans where Sharpe Optimised portfolio is more that 100% and cash is less than 0%.")
+                investor holds 100% of the Sharpe Optimised portfolio. If the portfolio hold is risk taking it can take loans where Sharpe Optimised portfolio is more that 100% and cash is less than 0%.")
 st.markdown("There is a linear relationship in returns, because the entire portfolio only has 2 components and as the risky portfolio weight decreases the returns decrease monotonously.")
 st.latex(r''' E(R_p) = r_f + \frac{E(R) - r_f}{\sigma_i} \sigma_p ''')
 
@@ -170,8 +169,8 @@ st.latex(r''' E(R_p) = r_f + \frac{E(R) - r_f}{\sigma_i} \sigma_p ''')
 st.markdown("## Utility Function")
 st.latex(r'''U = E(R) - 0.5 A \sigma ^2''')
 st.markdown("This function is from an economic model. Utility is as expressed as returns and is discounted by the level of realised risk. \
-            The coefficient of risk aversion is A. If an invest is less risk, risk averse A is small. \
-            Expected return, E(R) is proportionate to the level of utility")
+                The coefficient of risk aversion is A. If an invest is less risk, risk averse A is small. \
+                Expected return, E(R) is proportionate to the level of utility")
 
 a = st.number_input('Insert risk averse (Default is 30)', value = 30)
 
@@ -198,4 +197,4 @@ st.write(min_vol_opt_allocation )
 
 st.write("Individual Stock Returns and Volatility")
 for i, txt in enumerate(returns_df.columns):
-    st.write( "{}: annuaised return: {}, annualised volatility:{}".format(txt, round(an_rt[i], 2), round(an_vol[i], 2)))
+        st.write( "{}: annuaised return: {}, annualised volatility:{}".format(txt, round(an_rt[i], 2), round(an_vol[i], 2)))
