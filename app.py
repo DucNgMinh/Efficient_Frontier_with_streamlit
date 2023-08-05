@@ -24,7 +24,7 @@ start = start.strftime("%Y-%m-%d")
 end = end.strftime("%Y-%m-%d")
 
 # ticker_list
-ticker_list = pd.read_csv(r".\Data\listing_companies_enhanced-2023.csv")
+ticker_list = pd.read_csv(r"listing_companies_enhanced-2023.csv")
 
 # input widget to choose stock option
 tickers = st.multiselect("Select two or more stocks:", ticker_list['ticker'])
