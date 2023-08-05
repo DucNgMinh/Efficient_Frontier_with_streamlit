@@ -12,6 +12,7 @@ from graph import *
 import datetime
 # Title
 st.title("Efficient Portfolio Frontier")
+st.write("Github repo: [link](https://github.com/DucNgMinh/Efficient_Frontier_with_streamlit/tree/main)")
 
 # Input date
 start = st.date_input('Set an start date for', datetime.date(2021, 1, 1))
