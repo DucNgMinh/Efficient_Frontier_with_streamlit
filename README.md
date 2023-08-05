@@ -2,4 +2,4 @@
 
 ## Stock price data was obtained via vnstock package (https://github.com/thinh-vu/vnstock)
 
-## Link to web app: [efficient_frontier_with_streamlit]([https://www.google.com](https://efficientfrontierwithapp-enyvqqrwj7awxqbpbrn599.streamlit.app/)https://efficientfrontierwithapp-enyvqqrwj7awxqbpbrn599.streamlit.app/)
+## Link to web app: [efficient_frontier_with_streamlit]([https://www.google.com](https://efficientfrontierwithapp-enyvqqrwj7awxqbpbrn599.streamlit.app/)https://efficientfrontierwithapp-enyvqqrwj7awxqbpbrn599.streamlit.app)
