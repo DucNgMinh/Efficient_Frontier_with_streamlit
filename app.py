@@ -32,7 +32,12 @@ tickers = st.multiselect("Select two or more stocks:", ticker_list['ticker'])
 # create price df
 prices_df = calculate_prices_df(tickers, start, end)
 # plot
-st.pyplot(stock_price_trend_graph(prices_df, start_date= start, end_date= end))
+try:
+        st.pyplot(stock_price_trend_graph(prices_df, start_date= start, end_date= end))
+except:
+        pass
+
+
 
 
 st.markdown("# Log Returns ")
@@ -42,7 +47,10 @@ st.latex(r'''\log r_t = \log \frac{p_t}{p_{t-1}}''')
 # create daily returns df
 returns_df = calculate_returns_df(prices_df)
 # plot
-st.pyplot(daily_returns_stock(returns_df))
+try:
+        st.pyplot(daily_returns_stock(returns_df))
+except:
+        pass
 
 st.markdown("# Sharpe ratio")
 st.markdown("The Sharpe ratio is defined as:")
@@ -85,7 +93,10 @@ min_vol_allocation = min_vol_allocation.T
 st.markdown("## Minimum Volatility Portfolio Allocation (Percentage)")
 st.write(min_vol_allocation)
 
-st.pyplot(simulated_portfolio_graph(expected_Return, expected_Volatility, max_sharpe_index, min_volality_index, sharpe_Ratio ))
+try:
+        st.pyplot(simulated_portfolio_graph(expected_Return, expected_Volatility, max_sharpe_index, min_volality_index, sharpe_Ratio ))
+except:
+        pass
 
 st.markdown("# Portfolio Optimization theory")
 st.markdown("The plot of the randomly simulated portfolio exhibits an arch-shaped line positioned above a cluster of blue dots, which is commonly referred to as the efficient frontier. \
@@ -110,15 +121,18 @@ st.latex(r'''\begin{aligned}
         & && W \geq 0 \\
         \end{aligned}''')
 
-# calculate weight of max sharpe portfolio
-w_opt_sharpe = calculate_max_sharpe_opt_allocation(n_stocks, mean_returns, cov_matrix, risk_free_rate)
-max_sharpe_opt_allocation = pd.DataFrame(w_opt_sharpe['x'], index=returns_df.columns, columns=['allocation'])
-max_sharpe_opt_allocation.allocation = [round(i*100,2)for i in max_sharpe_opt_allocation.allocation]
-max_sharpe_opt_Return, max_sharpe_opt_Volatility, max_sharpe_opt_sharpe_Ratio = calculate(w_opt_sharpe['x'], mean_returns, cov_matrix, risk_free_rate)
-max_sharpe_opt_allocation = max_sharpe_opt_allocation.T
-# display
-st.write("Maximum Sharpe Ratio Optimal Portfolio Allocation (Percentage)")
-st.write(max_sharpe_opt_allocation)
+try:
+        # calculate weight of max sharpe portfolio
+        w_opt_sharpe = calculate_max_sharpe_opt_allocation(n_stocks, mean_returns, cov_matrix, risk_free_rate)
+        max_sharpe_opt_allocation = pd.DataFrame(w_opt_sharpe['x'], index=returns_df.columns, columns=['allocation'])
+        max_sharpe_opt_allocation.allocation = [round(i*100,2)for i in max_sharpe_opt_allocation.allocation]
+        max_sharpe_opt_Return, max_sharpe_opt_Volatility, max_sharpe_opt_sharpe_Ratio = calculate(w_opt_sharpe['x'], mean_returns, cov_matrix, risk_free_rate)
+        max_sharpe_opt_allocation = max_sharpe_opt_allocation.T
+        # display
+        st.write("Maximum Sharpe Ratio Optimal Portfolio Allocation (Percentage)")
+        st.write(max_sharpe_opt_allocation)
+except:
+        pass
 
 st.markdown("## Minimum Volatility portfolio")
 st.latex(r'''\begin{aligned}
@@ -129,15 +143,18 @@ st.latex(r'''\begin{aligned}
         & && W \geq 0 \\
         \end{aligned}''')
 
-# calculate weight of min vol portfolio
-w_opt_vol = calculate_min_vol_opt_allocation(n_stocks,  cov_matrix)
-min_vol_opt_allocation = pd.DataFrame(w_opt_vol['x'], index=returns_df.columns, columns=['allocation'])
-min_vol_opt_allocation.allocation = [round(i*100,2)for i in min_vol_opt_allocation.allocation]
-min_vol_opt_Return, min_vol_opt_Volatility, min_vol_opt_sharpe_Ratio = calculate(w_opt_vol['x'], mean_returns, cov_matrix, risk_free_rate)
-min_vol_opt_allocation = min_vol_opt_allocation.T
-# display
-st.write("Minimum Volatility Optimal Portfolio Allocation (Percentage)")
-st.write(min_vol_opt_allocation)
+try:
+        # calculate weight of min vol portfolio
+        w_opt_vol = calculate_min_vol_opt_allocation(n_stocks,  cov_matrix)
+        min_vol_opt_allocation = pd.DataFrame(w_opt_vol['x'], index=returns_df.columns, columns=['allocation'])
+        min_vol_opt_allocation.allocation = [round(i*100,2)for i in min_vol_opt_allocation.allocation]
+        min_vol_opt_Return, min_vol_opt_Volatility, min_vol_opt_sharpe_Ratio = calculate(w_opt_vol['x'], mean_returns, cov_matrix, risk_free_rate)
+        min_vol_opt_allocation = min_vol_opt_allocation.T
+        # display
+        st.write("Minimum Volatility Optimal Portfolio Allocation (Percentage)")
+        st.write(min_vol_opt_allocation)
+except:
+        pass
 
 st.markdown("## The Minimum Risk Mean-Variance Portfolio (Efficient Markowitz Frontier)")
 st.markdown("We can also plot a line on the graph that represents the efficient portfolios for a specific risk level, known as the 'efficient frontier'. \
@@ -151,11 +168,13 @@ st.latex(r'''\begin{aligned}
         & &&  W^T 1 = 1 \\
         & && W \geq 0 \\
         \end{aligned}''')
+try:
+        volatility_opt, simulate_returns = calculate_opt_allocation(n_stocks, mean_returns, cov_matrix, expected_Return, max_sharpe_index, min_volality_index)
 
-volatility_opt, simulate_returns = calculate_opt_allocation(n_stocks, mean_returns, cov_matrix, expected_Return, max_sharpe_index, min_volality_index)
-
-st.pyplot(portfolio_optimization_graph(returns_df, mean_returns, expected_Volatility, expected_Return, sharpe_Ratio, \
+        st.pyplot(portfolio_optimization_graph(returns_df, mean_returns, expected_Volatility, expected_Return, sharpe_Ratio, \
                                         max_sharpe_opt_Volatility, max_sharpe_opt_Return, min_vol_opt_Volatility, min_vol_opt_Return, volatility_opt, simulate_returns))
+except:
+        pass
 
 st.markdown("# Optimal Portfolio")
 st.markdown("## Capital Allocation Line")
@@ -173,28 +192,30 @@ st.markdown("This function is from an economic model. Utility is as expressed as
                 Expected return, E(R) is proportionate to the level of utility")
 
 a = st.number_input('Insert risk averse (Default is 30)', value = 30)
-
-st.pyplot(capital_allocation_line_graph(a, risk_free_rate, expected_Return, expected_Volatility, sharpe_Ratio, 
+try:
+        st.pyplot(capital_allocation_line_graph(a, risk_free_rate, expected_Return, expected_Volatility, sharpe_Ratio, 
                                 max_sharpe_opt_Return, max_sharpe_opt_Volatility, max_sharpe_opt_sharpe_Ratio,
                                 min_vol_opt_Volatility, min_vol_opt_Return, 
                                 volatility_opt, simulate_returns))
+        
+        # calculate annualised volatility
+        an_vol = np.std(returns_df) * np.sqrt(250)
+        # calculate annualised return
+        an_rt = mean_returns * 250
 
-# calculate annualised volatility
-an_vol = np.std(returns_df) * np.sqrt(250)
-# calculate annualised return
-an_rt = mean_returns * 250
 
+        st.write("Optimal maximum Sharpe Ratio Portfolio Allocation (Percentage):")
+        st.write("Annualised Return: {}".format(round(max_sharpe_opt_Return, 2)))
+        st.write("Annualised Volatility: {}".format(round(max_sharpe_opt_Volatility, 2)))
+        st.write(max_sharpe_opt_allocation)
 
-st.write("Optimal maximum Sharpe Ratio Portfolio Allocation (Percentage):")
-st.write("Annualised Return: {}".format(round(max_sharpe_opt_Return, 2)))
-st.write("Annualised Volatility: {}".format(round(max_sharpe_opt_Volatility, 2)))
-st.write(max_sharpe_opt_allocation)
+        st.write("Optimal minimum Volatility Portfolio Allocation (Percentage):")
+        st.write("Annualised Return: {}".format(round(min_vol_opt_Return, 2)))
+        st.write("Annualised Volatility: {}".format(round(min_vol_opt_Volatility, 2)))
+        st.write(min_vol_opt_allocation )
 
-st.write("Optimal minimum Volatility Portfolio Allocation (Percentage):")
-st.write("Annualised Return: {}".format(round(min_vol_opt_Return, 2)))
-st.write("Annualised Volatility: {}".format(round(min_vol_opt_Volatility, 2)))
-st.write(min_vol_opt_allocation )
-
-st.write("Individual Stock Returns and Volatility")
-for i, txt in enumerate(returns_df.columns):
-        st.write( "{}: annuaised return: {}, annualised volatility:{}".format(txt, round(an_rt[i], 2), round(an_vol[i], 2)))
+        st.write("Individual Stock Returns and Volatility")
+        for i, txt in enumerate(returns_df.columns):
+                st.write( "{}: annuaised return: {}, annualised volatility:{}".format(txt, round(an_rt[i], 2), round(an_vol[i], 2)))
+except:
+        pass
