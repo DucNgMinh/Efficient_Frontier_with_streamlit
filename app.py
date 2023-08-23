@@ -218,5 +218,3 @@ try:
                 st.write( "{}: annuaised return: {}, annualised volatility:{}".format(txt, round(an_rt[i], 2), round(an_vol[i], 2)))
 except:
         st.markdown("<h3 style='text-align: center; color: green;'>Choose stock options to draw graph </h3>", unsafe_allow_html=True)
-
-# End
